@@ -50,21 +50,39 @@ async function run() {
             res.send(result)
         })
 
-        app.put('/added/:id', async (req, res) => {
+        app.put('/user/:id',async(req,res)=>{
             const id = req.params.id;
             const updateQuantity = req.body;
-            const filter = { _id: ObjectId(id) };
-            const options = { upsert: true }
+            const filter = {_id: ObjectId(id)};
+            const options ={upsert: true}
+            console.log(id)
+            console.log(updateQuantity);
+
             const updatedDoc = {
                 $set: {
                     quantity: updateQuantity.newQuantity
                 }
-            }
-            const result = await productsCollection.updateOne(filter, options, updatedDoc)
+            };
+            const result = await productsCollection.updateOne(filter,updatedDoc,options);
             res.send(result)
         })
-
+        app.put('/delivery/:id',async(req,res)=>{
+            const id = req.params.id;
+            const updateQuantity = req.body
+            const delevary = updateQuantity.quantity -1;
+            console.log(delevary);
+            const filter = {_id: ObjectId(id)};
+            const options ={upsert: true}
+            const updatedDoc = {
+                $set: {
+                    quantity: delevary
+                }
+            };
+            const result = await productsCollection.updateOne(filter,updatedDoc,options);
+            res.send(result)
+        })
     }
+
     catch {
 
     }
