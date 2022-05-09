@@ -3,7 +3,7 @@ https://github.com/ProgrammingHeroWC4/warehouse-management-server-side-Md-Nihal
 */
 
 const express = require('express');
-const cors = require('cors');
+let cors = require('cors');
 const jwt = require('jsonwebtoken');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
